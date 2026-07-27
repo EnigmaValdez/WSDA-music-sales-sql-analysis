@@ -4,17 +4,17 @@ CREATE DATE: 07/25/2026
 DESCRIPTION: Competency 8 Milestone Activity - WSDA Music SQL Analysis
 */
 
--- Question 2: Invoices from USA with Total > 5
+-- Question 1: Invoices from USA with Total > 5
 SELECT InvoiceID, InvoiceDate, BillingAddress, BillingCity, BillingCountry, Total
 FROM Invoice
 WHERE BillingCountry = 'USA' AND Total > 5;
 
--- Question 3: Invoices where BillingCity starts with 'B'
+-- Question 2: Invoices where BillingCity starts with 'B'
 SELECT InvoiceID, InvoiceDate, BillingAddress, BillingCity, BillingCountry, Total
 FROM Invoice
 WHERE BillingCity LIKE 'B%';
 
--- Question 4: Categorize invoice totals using CASE statement
+-- Question 3: Categorize invoice totals using CASE statement
 SELECT InvoiceID, InvoiceDate, BillingAddress, BillingCity, BillingCountry, Total,
     CASE 
         WHEN Total < 2 THEN 'Low Total'
@@ -24,20 +24,20 @@ SELECT InvoiceID, InvoiceDate, BillingAddress, BillingCity, BillingCountry, Tota
 FROM Invoice
 ORDER BY Total DESC;
 
--- Question 5: Invoices with Total greater than the average Total
+-- Question 4: Invoices with Total greater than the average Total
 SELECT InvoiceID, InvoiceDate, BillingAddress, BillingCity, BillingCountry, Total
 FROM Invoice
 WHERE Total > (SELECT AVG(Total) FROM Invoice)
 ORDER BY Total ASC;
 
--- Question 6a: INNER JOIN between Invoice and Customer tables
+-- Question 5: INNER JOIN between Invoice and Customer tables
 SELECT i.InvoiceId, i.CustomerId, c.CustomerId, c.FirstName, c.LastName, 
        i.InvoiceDate, i.BillingAddress, i.BillingCity, i.BillingCountry, i.Total
 FROM Invoice i
 INNER JOIN Customer c ON i.CustomerId = c.CustomerId
 ORDER BY c.CustomerId;
 
--- Question 6b: Revised classmate query (Fixing Cartesian Product bug)
+-- Question 6: Revised classmate query (Fixing Cartesian Product bug)
 SELECT i.invoiceid, i.customerid, c.customerid, c.firstname, c.lastname, 
        i.invoicedate, i.billingaddress, i.billingcity, i.billingcountry, i.total
 FROM Invoice i
